@@ -14,4 +14,8 @@ class Cliente extends Model
     protected $fillable = [
         'nome', 'sobrenome', 'data_nascimento', 'cpf', 'celular', 'email',
     ];
+
+    public function getFullCPF(){
+        return mask($this->cpf, '###.###.###-##');
+    }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Cliente;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class ClienteController extends Controller
 {
@@ -13,8 +14,9 @@ class ClienteController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        //
+    {   
+        $clientes = Cliente::paginate(10);
+        return view('clientes\index', compact('clientes'));
     }
 
     /**
@@ -24,7 +26,8 @@ class ClienteController extends Controller
      */
     public function create()
     {
-        //
+        $cliente = new Cliente();
+        return view('clientes\create', compact('cliente'));
     }
 
     /**
@@ -35,7 +38,22 @@ class ClienteController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(),[
+            'nome' => 'required', 
+            'sobrenome' => 'required', 
+            'data_nascimento' => 'required|before:-18 years', 
+            'cpf' => 'required|cpf', 
+            'celular'=> 'required|', 
+            'email' => 'required|email',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect('clientes\create')
+                        ->withErrors($validator)
+                        ->withInput();
+        }
+
+        return redirect('clientes');
     }
 
     /**
