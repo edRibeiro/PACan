@@ -12,7 +12,7 @@ class ClienteRepository implements ClienteRepositoryInterface{
     }
 
     public function getAllOrderBy($order){
-        return DB::table('clientes')->orderByRaw($order)->paginate(10);
+        return Cliente::orderBy($order)->paginate(10); 
     }
 
     public function all(){

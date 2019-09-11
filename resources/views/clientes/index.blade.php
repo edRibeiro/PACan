@@ -18,11 +18,23 @@
             <table class="table table-hover">
                 <tbody>
                     <tr>
-                        <th>ID</th>
-                        <th>Nome</th>
+                        <th>
+                            <a class="text-dark" href="{{ url('clientes?order=id') }}">
+                                ID
+                            </a>
+                        </th>
+                        <th>
+                            <a class="text-dark" href="{{ url('clientes?order=nome') }}">
+                                Nome
+                            </a>
+                        </th>
                         <th>CPF</th>
                         <th>Celular</th>                        
-                        <th>Data de Registro</th>                        
+                        <th>
+                            <a class="text-dark" href="{{ url('clientes?order=created_at') }}">
+                                Data de Registro
+                            </a>
+                        </th>                        
                         <th>Ações</th>
                     </tr>
                     @foreach($clientes as $cliente)

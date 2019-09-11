@@ -24,7 +24,10 @@ class ClienteController extends Controller
      */
     public function index(Request $request)
     {   
-        
+        $order = \Request::get('order');
+        if($order)
+            $clientes = $this->repository->getAllOrderBy($order);
+        else
         $clientes = $this->repository->all();
         
         return view('clientes\index', compact('clientes'));
