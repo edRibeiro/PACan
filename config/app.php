@@ -177,8 +177,6 @@ return [
 
         geekcom\ValidatorDocs\ValidatorProvider::class,
 
-        \Laraerp\Ordination\OrdinationServiceProvider::class,
-
     ],
 
     /*
@@ -229,7 +227,6 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-        'Order' => \Laraerp\Ordination\Facade::class,
 
     ],
 

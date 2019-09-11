@@ -3,19 +3,30 @@
 namespace App\Http\Controllers;
 
 use App\Cliente;
+use App\Repositories\ClienteRepositoryInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
 class ClienteController extends Controller
 {
+
+    protected $repository;
+
+
+    public function __construct(ClienteRepositoryInterface $repository) {
+        $this->repository = $repository;
+        $this->middleware('auth');
+   }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {   
-        $clientes = Cliente::paginate(10);
+        
+        $clientes = $this->repository->all();
+        
         return view('clientes\index', compact('clientes'));
     }
 
@@ -53,6 +64,8 @@ class ClienteController extends Controller
                         ->withInput();
         }
 
+        $this->repository->create($request->all());
+
         return redirect('clientes');
     }
 
@@ -62,9 +75,10 @@ class ClienteController extends Controller
      * @param  \App\Cliente  $cliente
      * @return \Illuminate\Http\Response
      */
-    public function show(Cliente $cliente)
+    public function show($id)
     {
-        //
+        $cliente = $this->repository->get($id);
+        return view('clientes\show', compact('cliente'));
     }
 
     /**
@@ -73,9 +87,10 @@ class ClienteController extends Controller
      * @param  \App\Cliente  $cliente
      * @return \Illuminate\Http\Response
      */
-    public function edit(Cliente $cliente)
+    public function edit($id)
     {
-        //
+        $cliente = $this->repository->get($id);
+        return view('clientes\edit', compact('cliente'));
     }
 
     /**
@@ -85,9 +100,25 @@ class ClienteController extends Controller
      * @param  \App\Cliente  $cliente
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Cliente $cliente)
+    public function update(Request $request, $id)
     {
-        //
+        $validator = Validator::make($request->all(),[
+            'nome' => 'required', 
+            'sobrenome' => 'required', 
+            'data_nascimento' => 'required|before:-18 years', 
+            'cpf' => 'required|cpf', 
+            'celular'=> 'required|', 
+            'email' => 'required|email',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect('clientes\\'.$id.'\edit')
+                        ->withErrors($validator)
+                        ->withInput();
+        }       
+        
+        $this->repository->update($id, $request->all());
+        return redirect('clientes');
     }
 
     /**
@@ -96,8 +127,10 @@ class ClienteController extends Controller
      * @param  \App\Cliente  $cliente
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Cliente $cliente)
-    {
-        //
+    public function destroy($id)
+    {        
+        $this->repository->delete($id);
+        return redirect('clientes');
     }
+
 }

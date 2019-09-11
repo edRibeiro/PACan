@@ -18,4 +18,9 @@ class Cliente extends Model
     public function getFullCPF(){
         return mask($this->cpf, '###.###.###-##');
     }
+
+    function getNomeCompleto()
+    {
+        return $this->nome.' '.$this->sobrenome;
+    }
 }

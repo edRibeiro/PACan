@@ -31,17 +31,18 @@
                         <td>{{ $cliente->nome.' '.$cliente->sobrenome }}</td>
                         <td>{{ $cliente->getFullCPF() }}</td>
                         <td>{{ $cliente->celular }}</td>
-                        <td>{{ $cliente->created_at->format("m/d/Y") }}</td>
+                        <td>{{ $cliente->created_at->format("d/m/Y") }}</td>
                         <td>
-                            <a href="#">
+                        <a href="{{ url('clientes'.'\\'.$cliente->id) }}">
                                 <i class="fa fa-eye"></i>
                             </a>
                             /
-                            <a href="#">
+                            <a href="{{ url('clientes'.'\\'.$cliente->id.'\edit') }}">
                                 <i class="fa fa-edit blue"></i>
                             </a>
                             /
-                            <a href="#">
+                            <a href="#" data-toggle="modal" onclick="deleteData({{$cliente->id}})" 
+                                data-target="#DeleteModal">
                                 <i class="fa fa-trash red"></i>
                             </a>
                         </td>
@@ -62,5 +63,45 @@
     </div>    
 
 </div>
+
+<div id="DeleteModal" class="modal fade " role="dialog">
+    <div class="modal-dialog" role="document">
+      <!-- Modal content-->
+      <form action="" id="deleteForm" method="post">
+          <div class="modal-content">
+              <div class="modal-header bg-danger">                  
+                  <h4 class="modal-title text-center">Confirmar Exclusão</h4>
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+              </div>
+              <div class="modal-body">
+                @method('delete')
+                @csrf 
+                  <p class="text-center">Tem certeza de que deseja excluir?</p>
+              </div>
+              <div class="modal-footer">
+                  
+                <button type="button" class="btn btn-success" data-dismiss="modal">Cancelar</button>
+                <button type="submit" name="" class="btn btn-danger" data-dismiss="modal" onclick="formSubmit()">Sim, Remover</button>
+                  
+              </div>
+          </div>
+      </form>
+    </div>
+   </div>
+
+   <script type="application/javascript">
+    function deleteData(id)
+     {
+         var id = id;
+         var url = '{{ route("clientes.destroy", ":id") }}';
+         url = url.replace(':id', id);
+         $("#deleteForm").attr('action', url);
+     }
+
+    function formSubmit()
+    {
+        $("#deleteForm").submit();
+    }
+ </script>
 
 @endsection
