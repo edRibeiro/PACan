@@ -31,7 +31,7 @@
 <div class="form-group row">
     <label for="cpf" class="col-2 col-form-label">CPF</label>
     <div class="col-10">
-        <input type="number" class="form-control" id="cpf" name="cpf" placeholder="" value="{{ old('cpf') ?? $cliente->cpf }}" required onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+        <input type="text" class="form-control" id="cpf" name="cpf" placeholder="" value="{{ old('cpf') ?? $cliente->cpf }}" required onkeypress="return event.charCode >= 48 && event.charCode <= 57">
         <div class="invalid-feedback">
             Valid first name is required.
         </div>
