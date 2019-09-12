@@ -27,7 +27,7 @@
                         </div>
                     @endif
 
-                    <form class="needs-validation" method="post" action="{{url('clientes\\'.$cliente->id)}}">
+                    <form class="needs-validation" method="post" action="{{url('clientes/'.$cliente->id)}}">
                         @method('put')
                         @csrf
                             

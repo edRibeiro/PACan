@@ -6,7 +6,7 @@
       <div class="col-md-12">
         <div class="card">
           <div class="card-header">
-                <a class="btn btn-primary float-right" href="{{ url('clientes\create')}}">Novo Cliente
+                <a class="btn btn-primary float-right" href="{{ url('clientes/create')}}">Novo Cliente
                         <i class="fas fa-user-plus"></i>
                     </a>
             <h3 class="card-title">Clientes</h3>
@@ -49,7 +49,7 @@
                                 <i class="fa fa-eye"></i>
                             </a>
                             /
-                            <a href="{{ url('clientes'.'\\'.$cliente->id.'\edit') }}">
+                            <a href="{{ url('clientes/'.$cliente->id.'/edit') }}">
                                 <i class="fa fa-edit blue"></i>
                             </a>
                             /
@@ -81,7 +81,7 @@
       <!-- Modal content-->
       <form action="" id="deleteForm" method="post">
           <div class="modal-content">
-              <div class="modal-header bg-danger">                  
+              <div class="modal-header bg-warning">                  
                   <h4 class="modal-title text-center">Confirmar Exclusão</h4>
                   <button type="button" class="close" data-dismiss="modal">&times;</button>
               </div>

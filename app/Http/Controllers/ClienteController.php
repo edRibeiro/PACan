@@ -30,7 +30,7 @@ class ClienteController extends Controller
         else
         $clientes = $this->repository->all();
         
-        return view('clientes\index', compact('clientes'));
+        return view('clientes/index', compact('clientes'));
     }
 
     /**
@@ -41,7 +41,7 @@ class ClienteController extends Controller
     public function create()
     {
         $cliente = new Cliente();
-        return view('clientes\create', compact('cliente'));
+        return view('clientes/create', compact('cliente'));
     }
 
     /**
@@ -62,7 +62,7 @@ class ClienteController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return redirect('clientes\create')
+            return redirect('clientes/create')
                         ->withErrors($validator)
                         ->withInput();
         }
@@ -81,7 +81,7 @@ class ClienteController extends Controller
     public function show($id)
     {
         $cliente = $this->repository->get($id);
-        return view('clientes\show', compact('cliente'));
+        return view('clientes/show', compact('cliente'));
     }
 
     /**
@@ -93,7 +93,7 @@ class ClienteController extends Controller
     public function edit($id)
     {
         $cliente = $this->repository->get($id);
-        return view('clientes\edit', compact('cliente'));
+        return view('clientes/edit', compact('cliente'));
     }
 
     /**
@@ -115,7 +115,7 @@ class ClienteController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return redirect('clientes\\'.$id.'\edit')
+            return redirect('clientes/'.$id.'/edit')
                         ->withErrors($validator)
                         ->withInput();
         }       

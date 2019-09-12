@@ -1,11 +1,10 @@
 # PACan
 Projeto para avaliação de conhecimentos de Laravel.
 
+* Run ` composer install `
+* Save as the `.env.example` to `.env` e configure a conexão com o banco de dados
+* Run ` php artisan key:generate` to generate the app key
+* Run ` npm install ` 
+* Run ` php artisan migrate ` 
+* Done !!! Enjoy Customizing and building awesome app 
 
-
-Renomeie o arquivo .env.example para .env ou copie seu conteúdo para um novo arquivo .env;
-execute no terminal ou cmd o comando: npm install;
-execute no terminal ou cmd o comando: npm run dev;
-execute no terminal ou cmd o comando: php artisan key:generate;
-configure a conexão com o banco de dados;
-execute no terminal ou cmd o comando: php artisan migrate;
